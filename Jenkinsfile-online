@@ -71,7 +71,7 @@ pipeline {
                     credentialsId: env.KUBECONFIG_CREDENTIAL_ID,
                     variable: 'KUBECONFIG')
                     ]) {
-                    sh 'envsubst < deploy/dev-all-in-one/devops-sample.yaml | kubectl apply -f -'
+                    sh 'envsubst < deploy/dev/devops-sample.yaml | kubectl apply -f -'
                 }
             }
           }
@@ -110,10 +110,9 @@ pipeline {
                     credentialsId: env.KUBECONFIG_CREDENTIAL_ID,
                     variable: 'KUBECONFIG')
                     ]) {
-                    sh 'envsubst < deploy/prod-all-in-one/devops-sample.yaml | kubectl apply -f -'
+                    sh 'envsubst < deploy/prod/devops-sample.yaml | kubectl apply -f -'
                 }
             }
-            kubernetesDeploy(configs: 'deploy/prod-ol/**', enableConfigSubstitution: true, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID")
           }
         }
     }
